@@ -1,5 +1,3 @@
-use core::f64;
-
 //Used to define a type that groups together related data. Each field in a struct can have a different type.
 struct User{
     name: String,
@@ -12,6 +10,24 @@ enum Shape{
     Circle(f64),
     Square(f64),
     Rectangle(f64,f64),
+}
+
+//generic enum
+//struct Point<T,V>{
+//x: T,
+//y: T,
+//z: V,
+//}
+
+//option enum- use to handle null as it does not have a null(option is a prebuild enum no need to define it.)
+
+fn find_a(name: String) -> Option<i32> {
+    for (index,char) in name.chars().enumerate(){
+        if char == 'a' {
+            return Some(index as i32);
+        }
+    }
+    return None;
 }
 
 fn main() {
@@ -28,9 +44,17 @@ fn main() {
     let area: f64 = cal_area(circle);
     println!("{}",area);
 
-    //error handling
-    
+    //error handling- via enum
+    //null handling- via pub enum
+    let name: String = String::from("Nandini");
+    let res: Option<i32> = find_a(name);
+    match res{
+        Option::Some(index) => println!("there is a {}",index),
+        Option::None => println!("not there"),
+    }
 }
+
+//cargo == npm
 
 fn cal_area(shape: Shape) -> f64{
     let ans: f64 = match shape {
@@ -40,3 +64,10 @@ fn cal_area(shape: Shape) -> f64{
     };
     return  ans;
 }
+
+//actix: exxtremely fast http serrvice
+//serde: serialization and decerialization 
+//tokio: async runtime rust
+//request: http request
+//sqlx: connect sql db
+//chrono: date time
